@@ -8,7 +8,10 @@ function netralize($str){
 	$str=str_replace('[^a-z0-9]', "", $str);
 	return $str;
 }
-
+function base_url($url){
+	$str=__HOMEPAGE__.'/'.$url;
+	return $str;
+}
 function check_var($method,$var){
 	if ($method=='get'){
 		return isset($_GET[$var])?netralize($_GET[$var]):'';

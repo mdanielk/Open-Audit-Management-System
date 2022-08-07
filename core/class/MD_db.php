@@ -5,7 +5,6 @@ class MD_db extends SQLite3{
 		}
    }
 
-
 class MD_mysqli extends mysqli {
     public function __construct($host, $user, $pass, $db) {
         parent::__construct($host, $user, $pass, $db);

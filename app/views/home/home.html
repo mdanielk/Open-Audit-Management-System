@@ -1,3 +1,32 @@
-<div class="row">
- <div class="col s12">This div is 12-columns wide on all screen sizes</div>
+<nav>
+    <div class="nav-wrapper">
+      <a href="{__HOMEPAGE__}" class="brand-logo">{__TITLE__}</a>
+      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="">Home</a></li>
+        <li><a href="">Audit Plan</a></li>
+        <li><a href="">Fieldwork</a></li>
+        <li><a href="">Report</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <ul class="sidenav" id="mobile-demo">
+    <li><a href="sass.html">Sass</a></li>
+    <li><a href="badges.html">Components</a></li>
+    <li><a href="collapsible.html">Javascript</a></li>
+    <li><a href="mobile.html">Mobile</a></li>
+  </ul>
+
+<div class="wrapper">
+	<section id="content">
+		<div class="row">
+			container 1
+		</div>
+	</section>
 </div>
+<script type="text/javascript">
+$(document).ready(function(){
+    $('.sidenav').sidenav();
+  });
+</script>

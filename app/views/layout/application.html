@@ -3,14 +3,18 @@
 <head>
 <title>{__TITLE__}</title>
 <meta charset="UTF-8">
+<meta http-equiv="Pragma" content="no-cache">
 {__META__}
 {__FAVICON__}
 {__STYLESHEET__}
 {__JAVASCRIPT__}
-
 </head>
 <body>
 <div id="_init"></div>
+<div class="col s12 m12">
+	<div id="ajax_loading" class="loading_login progress scale-transition scale-out">
+		<div class="indeterminate"></div>
+	</div>
+</div>
 	{__APP_CONTENT__}
-  </div>
 </html>

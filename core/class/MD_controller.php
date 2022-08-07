@@ -28,10 +28,13 @@ class MD_Controller extends MD_Template{
 		}
 	}
 	
-	public function loadmodel($model){
+	public function loadmodel($model,$alias=''){
 		if(file_exists('app/models/'.$model.'.php')){
 			include 'app/models/'.$model.'.php';
-			$this->model=new $model;	
+			if($alias != '')
+				$this->$alias=new $model;
+			else
+				$this->$model=new $model;
 			}
 		else {
 				echo 'model not found';
@@ -69,7 +72,7 @@ class MD_Controller extends MD_Template{
 		}
 	public function autoloadfavicon(){
 		$directory = "assets/favicon/";
-		$files = glob($directory . "*.ico");
+		$files = glob($directory . "*.png");
 		$data = '';
 		foreach($files as $file)
 				{
@@ -147,22 +150,15 @@ class MD_Controller extends MD_Template{
 		header('location:'.__HOMEPAGE__.'/'.$url);
 	}
 
-	public function connect_sqlite(){
-    if ($_SESSION['username_user']==TRUE){
-		$this->dbsqlite = new MD_db($_SESSION['db_user']);
-    }
-		else{
-			$this->dbsqlite = new MD_db('open_audit_master');
-		}
+	public function connect_sqlite(){    
+		$this->dbsqlite = new MD_db(__SQLITEDB__);		
 		$this->dbsqlite->busyTimeout(5000);
 	}	
 	public function close_sqlite(){
 		$this->dbsqlite->close();
 		unset($this->dbsqlite);
 	}
-	public function create_user_db($user){
-    copy('dbs/master.data','dbs/'.$user);
-  }
+	
 
 }
 ?>

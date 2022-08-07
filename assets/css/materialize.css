@@ -3197,7 +3197,7 @@ td, th {
 }
 
 .progress {
-  position: relative;
+  position: fixed;
   height: 4px;
   display: block;
   width: 100%;
@@ -3205,6 +3205,7 @@ td, th {
   border-radius: 2px;
   margin: 0.5rem 0 1rem 0;
   overflow: hidden;
+  z-index:1000;
 }
 
 .progress .determinate {
@@ -4271,10 +4272,10 @@ table span.badge {
 
 nav {
   color: #fff;
-  background-color: #ee6e73;
+  background-color: #438eb9;
   width: 100%;
-  height: 56px;
-  line-height: 56px;
+  height: 40px;
+  line-height: 40px;
 }
 
 nav.nav-extended {
@@ -4476,11 +4477,11 @@ nav .input-field label.active i {
     min-height: 64px;
   }
   nav, nav .nav-wrapper i, nav a.sidenav-trigger, nav a.sidenav-trigger i {
-    height: 64px;
-    line-height: 64px;
+    height: 40px;
+    line-height: 40px;
   }
   .navbar-fixed {
-    height: 64px;
+    height: 40px;
   }
 }
 

@@ -19,4 +19,4 @@ define('__HOMEPAGE__','http://localhost:9090/open-audit-management-system');
 define('__KEYWORD__','');
 define('__PATH__',__HOMEPAGE__.'/app/');
 define('__FOOTER__','&copy 2022 - mdanielk.com');
-define('__SQLITEDB__','open-audit-db');
+define('__SQLITEDB__','open-audit-master.db');

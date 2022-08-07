@@ -8,16 +8,12 @@
 
 		<div id="basic-form" class="section">
 			<div class="row">
-				<div class="col s12 m12">
-					<div id="ajax_loading" class="loading_login progress scale-transition scale-out">
-						<div class="indeterminate"></div>
-					</div>
-				</div>
+				
 				<div class="col s12 m4"></div>
 				<div class="col s12 m4 scale-transition scale-in" id="dformLogin">
 					<div class="card-panel">
 						<div class="row">
-						<form class="form" role="form" autocomplete="off" id="formLogin" novalidate="" method="POST">
+						<form class="form" role="form" autocomplete="off" id="formLogin" novalidate="true" method="POST">
 								<div class="input-field">
 									<i class="material-icons prefix">account_circle</i>
 									<label for="user_id">{__USERID__}</label>
@@ -26,8 +22,8 @@
 								</div>
 								<div class="input-field">
 									<i class="material-icons prefix">lock_outline</i>`
-									<label for="user_password">{__PASSWORD__}</label>
-									<input type="password" name="user_password" class="validate" id="user_password" required="" autocomplete="off" required="required">
+									<label for="password">{__PASSWORD__}</label>
+									<input type="password" name="password" class="validate" id="password" required="" autocomplete="off" required="required">
 
 								</div>
 							
@@ -42,54 +38,17 @@
 							</form>
 						</div>
 					</div>
-				</div>
-				<div class="col s12 m4 scale-transition scale-out left" id="dformChangePass">
-					<div class="card-panel">
-						<div class="row">
-							<form class="form" role="form" autocomplete="off" id="formChangePass" novalidate="" method="POST">
-								<div class="m12 center">
-									<strong>CHANGE PASSWORD</strong>
-								</div>
-								<div class="input-field">
-									<i class="material-icons prefix">account_circle</i>
-									<label for="c_user_id">User-ID</label>
-									<input type="text" class="validate" name="c_user_id" id="c_user_id" required="required" autocomplete="off">
-
-								</div>
-								<div class="input-field">
-									<i class="material-icons prefix">lock_outline</i>`
-									<label for="c_old_password">Password Lama</label>
-									<input type="password" name="c_old_password" class="validate" id="c_old_password" required="" autocomplete="off" required="required">
-
-								</div>
-								<div class="input-field">
-									<i class="material-icons prefix">lock_outline</i>`
-									<label for="c_new_password">Password Baru</label>
-									<input type="password" name="c_new_password" class="validate" id="c_new_password" required="" autocomplete="off" required="required">
-
-								</div>
-								<div class="input-field">
-									<i class="material-icons prefix">lock_outline</i>`
-									<label for="c_new_password_confirm">Ulangi Password Baru</label>
-									<input type="password" name="c_new_password_confirm" class="validate" id="c_new_password_confirm" required="" autocomplete="off" required="required">
-
-								</div>
-								<button type="submit" class="btn waves-effect waves-light right" id="btnLogin">
-									<i class="material-icons right">lock_open</i> CHange</button>
-							</form>
-						</div>
-					</div>
-				</div>
+				</div>				
 			</div>
 		</div>
 	</div>
 </div>
 <script type="text/javascript">
-
-	$('#formLogin').submit(function() {
-		var url = '<?=base_url("login/process")?>';
-		var redirect	= '<?=base_url()?>';
-		var dataString  = $(this).serialize();
+$('#formLogin').submit(function() {
+	var url = '{__FORM_URL__}';
+	var redirect	= '{__HOMEPAGE__}';
+	var dataString  = $(this).serialize();
+	  M.AutoInit();
 		$.ajax({
 			type: 'post',
 			url: url,
@@ -99,28 +58,22 @@
 				$('#ajax_loading').addClass('scale-in');
 			},
 			success: function(data) {
-
-				if (data.status == "0") {					
-					Materialize.toast(data.message, 2000);
+				if (data.status == "0") {				
+					M.toast({html:data.message});
 					$('#ajax_loading').removeClass('scale-in');	
 				}
 				if (data.status == "1") {
-					Materialize.toast(data.message, 2000);
 					$('#user_id').attr('disabled','disabled');
 					$('#user_password').attr('disabled','disabled');
 					$('#btnLogin').addClass('disabled');
-					setTimeout(function() {
-						window.location = redirect;
-					}, 2000);				
+					window.location = redirect;
+									
 				}
 				if (data.status == "2") {
-					Materialize.toast(data.message, 2000);
+					M.toast({html:data.message});
 					$('#ajax_loading').removeClass('scale-in');
 					$('#dformLogin').removeClass('scale-in');
-					$('#dformLogin').hide();
-					//$('#dformLogin').addClass('scale-out');
-					$('#dformChangePass').addClass('scale-in');
-					
+					$('#dformLogin').hide();					
 				}
 			},
 			complete: function() {
@@ -131,56 +84,6 @@
 				var str = lastRefreshed.toString() +"\n\n"+errorThrown;
 				$('.ajax_loading').hide();
 				$('#validation-error').html(str);
-			}
-		});
-		return false;
-	});
-	
-	$('#formChangePass').submit(function() {
-		var url = '<?=base_url("login/processChangePassword")?>';
-		var redirect	= '<?=base_url()?>';
-		var dataString  = $(this).serialize();
-		$.ajax({
-			type: 'post',
-			url: url,
-			data: dataString,
-			dataType: 'json',
-			beforeSend: function() {
-				$('#ajax_loading').addClass('scale-in');
-			},
-			success: function(data) {
-
-				if (data.status == "0") {
-					Materialize.toast(data.message, 2000);
-					$('#ajax_loading').removeClass('scale-in');
-				}
-				if (data.status == "1") {
-					Materialize.toast(data.message, 2000);
-					/*$('#user_id').attr('disabled','disabled');
-					$('#user_password').attr('disabled','disabled');
-					$('#btnLogin').addClass('disabled');*/
-					setTimeout(function() {
-						window.location = redirect;
-					}, 2000);
-				}
-				if (data.status == "2") {
-					Materialize.toast(data.message, 2000);
-					$('#ajax_loading').removeClass('scale-in');
-					$('#dformLogin').removeClass('scale-in');
-					$('#dformLogin').hide();
-					
-					$('#dformChangePass').addClass('scale-in');
-					$('#c_user_id').attr("value","A");
-
-				}
-			},
-			complete: function() {
-				$('#ajax_loading').removeClass('scale-in');
-			},
-			error: function (jqXHR, textStatus, errorThrown) {
-				var lastRefreshed = new Date();
-				var str = lastRefreshed.toString() +"\n\n"+errorThrown;
-				$('.ajax_loading').hide();
 			}
 		});
 		return false;
