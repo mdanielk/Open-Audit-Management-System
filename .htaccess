@@ -1,0 +1,19 @@
+<IfModule mod_rewrite.c>
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^localhost
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(assets)/(javascripts|stylesheets|images|fonts|swf)/(^/|.*)$ $1/$2/$3 [QSA,L]
+RewriteRule ^(assets)/(images)/([^/]*)/(^/|.*)$ $1/$2/$3/$4 [QSA,L]
+
+RewriteRule ^([^/]*)$ index.php?md=$1 [QSA,L]
+RewriteRule ^([^/]*)/([^/]*)$ index.php?md=$1&fx=$2 [QSA,L]
+RewriteRule ^([^/]*)/([^/]*)/$ index.php?md=$1&fx=$2 [QSA,L]
+RewriteRule ^([^/]*)/([^/]*)/([^/]*)/([^/]*)$ index.php?md=$1&fx=$2&$3=$4 [QSA,L]
+RewriteRule ^([^/]*)/([^/]*)/([^/]*)/([^/]*)/$ index.php?md=$1&fx=$2&$3=$4 [QSA,L]
+RewriteRule ^([^/]*)/([^/]*)/([^/]*)/([^/]*)/([^/]*)/([^/]*)$ index.php?md=$1&fx=$2&$3=$4&$5=$6 [QSA,L]
+RewriteRule ^([^/]*)/([^/]*)/([^/]*)/([^/]*)/([^/]*)/([^/]*)/ index.php?md=$1&fx=$2&$3=$4&$5=$6 [QSA,L]
+#RewriteRule ^([^/]*)/([^/]*)/([^/]*)/$ index.php?md=$1&fx=$2&var=$3 [QSA,L]
+Options All -Indexes
+</IfModule>
+
