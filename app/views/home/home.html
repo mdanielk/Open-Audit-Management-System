@@ -1,32 +1,148 @@
+<header>
+<ul id="dropdownProfile" class="dropdown-content">
+  <li><a href="#!">Your profile</a></li>
+  <li><a href="#!">Settings</a></li>
+  <li><a href="#!">Help</a></li>
+  <li class="divider"></li>
+  <li><a href="#!">Signout</a></li>
+</ul>
+<div class="navbar-fixed">
 <nav>
     <div class="nav-wrapper">
       <a href="{__HOMEPAGE__}" class="brand-logo">{__TITLE__}</a>
-      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-      <ul class="right hide-on-med-and-down">
+  
+      <ul class="right">
         <li><a href="">Home</a></li>
         <li><a href="">Audit Plan</a></li>
         <li><a href="">Fieldwork</a></li>
         <li><a href="">Report</a></li>
+        <li><a href="">Follow Up</a></li>
+		<li><a class="dropdown-trigger" href="#!" data-target="dropdownProfile">Login As root!<i class="material-icons right">arrow_drop_down</i></a></li>
       </ul>
     </div>
-  </nav>
-
-  <ul class="sidenav" id="mobile-demo">
-    <li><a href="sass.html">Sass</a></li>
-    <li><a href="badges.html">Components</a></li>
-    <li><a href="collapsible.html">Javascript</a></li>
-    <li><a href="mobile.html">Mobile</a></li>
-  </ul>
-
-<div class="wrapper">
-	<section id="content">
-		<div class="row">
-			container 1
-		</div>
-	</section>
+ </nav>
 </div>
+  <div class="sidenav sidenav-fixed padding">
+    <div class="col s12 center">
+		{__PHOTO__}
+		<h4>{__FULLNAME__}</h4>
+		{__JOBTITLE__}
+	</div>
+	<div class="divider"></div>
+	<div class="row">
+		<div class="col s12 left">
+			<h5>{__RECENT_AUDIT__}</h5>
+			
+			<ul class="collection">
+				<li class="collection-item">GA - Audit 1</li>
+				<li class="collection-item">GA - Audit 2</li>
+				<li class="collection-item">GA - Audit 3</li>
+			</ul>
+		</div>
+	</div>
+  </div>
+
+</header>
+<main>
+<section id="content">
+	<div class="mid-container">
+		<div class="col s12 m6 l3">
+							<div class="card gradient-45deg-light-blue-cyan gradient-shadow min-height-100 white-text">
+								<div class="padding-4">
+									<div class="col s6 m6">
+										<i class="material-icons background-round mt-5">receipt</i>
+										<p>Total berkas </p>
+									</div>
+									<div class="col s6 m6 right-align">
+										<h5 class="mb-0">240 </h5>
+										<p class="no-margin">Remaining</p>
+										<p>9.400</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col s12 m6 l3">
+							<div class="card gradient-45deg-light-blue-cyan gradient-shadow min-height-100 white-text">
+								<div class="padding-4">
+									<div class="col s6 m6">
+										<i class="material-icons background-round mt-5">receipt</i>
+										<p>Total berkas </p>
+									</div>
+									<div class="col s6 m6 right-align">
+										<h5 class="mb-0">240 </h5>
+										<p class="no-margin">Remaining</p>
+										<p>9.400</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col s12 m6 l3">
+							<div class="card gradient-45deg-light-blue-cyan gradient-shadow min-height-100 white-text">
+								<div class="padding-4">
+									<div class="col s6 m6">
+										<i class="material-icons background-round mt-5">receipt</i>
+										<p>Total berkas </p>
+									</div>
+									<div class="col s6 m6 right-align">
+										<h5 class="mb-0">240 </h5>
+										<p class="no-margin">Remaining</p>
+										<p>9.400</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col s12 m6 l3">
+							<div class="card gradient-45deg-light-blue-cyan gradient-shadow min-height-100 white-text">
+								<div class="padding-4">
+									<div class="col s6 m6">
+										<i class="material-icons background-round mt-5">receipt</i>
+										<p>Total berkas </p>
+									</div>
+									<div class="col s6 m6 right-align">
+										<h5 class="mb-0">240 </h5>
+										<p class="no-margin">Remaining</p>
+										<p>9.400</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col s12 m6 l3">
+							<div class="card gradient-45deg-light-blue-cyan gradient-shadow min-height-100 white-text">
+								<div class="padding-4">
+									<div class="col s6 m6">
+										<i class="material-icons background-round mt-5">receipt</i>
+										<p>Total berkas </p>
+									</div>
+									<div class="col s6 m6 right-align">
+										<h5 class="mb-0">240 </h5>
+										<p class="no-margin">Remaining</p>
+										<p>9.400</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col s12 m6 l3">
+							<div class="card gradient-45deg-light-blue-cyan gradient-shadow min-height-100 white-text">
+								<div class="padding-4">
+									<div class="col s6 m6">
+										<i class="material-icons background-round mt-5">receipt</i>
+										<p>Total berkas </p>
+									</div>
+									<div class="col s6 m6 right-align">
+										<h5 class="mb-0">240 </h5>
+										<p class="no-margin">Remaining</p>
+										<p>9.400</p>
+									</div>
+								</div>
+							</div>
+						</div>
+	</div>
+</section>
+
+</main>
 <script type="text/javascript">
 $(document).ready(function(){
     $('.sidenav').sidenav();
+	$(".dropdown-trigger").dropdown();
   });
 </script>

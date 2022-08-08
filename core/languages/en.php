@@ -10,7 +10,8 @@ class language{
 			"__USERID__"=>"User-ID",
 			"__PASSWORD__"=>"Password",
 			"__LOGIN__"=>"Login",
-			"__REMEMBER__"=>"Remember me on this computer "
+			"__REMEMBER__"=>"Remember me on this computer",
+			"__RECENT_AUDIT__"=>"Recent Audit Program"
 		);
 		return $data;
 	}
