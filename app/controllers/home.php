@@ -1,7 +1,7 @@
 <?php
 class home extends MD_app{	
 	public function __construct(){
-
+		$this->login_required();
 	}
 	public function index(){
 			$this->SetTemplate($this->getview("home","home"));

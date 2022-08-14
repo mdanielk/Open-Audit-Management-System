@@ -7,9 +7,13 @@
 *
 **/
 // routing 
-$default_route = 'home';
-$default_language = 'en';
-$version = '1.0';
+$default_route 		= 'home';
+$login_route 		= 'login/';
+$error404_route 	= 'error/404/';
+
+//param
+$default_language 	= 'en';
+$version 			= '1.0';
 //mysql database
 
 define('__TITLE__','Open Audit Management System');

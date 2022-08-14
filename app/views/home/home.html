@@ -4,14 +4,14 @@
   <li><a href="#!">Settings</a></li>
   <li><a href="#!">Help</a></li>
   <li class="divider"></li>
-  <li><a href="#!">Signout</a></li>
+  <li><a href="{__HOMEPAGE__}/logout/">Logout</a></li>
 </ul>
 <div class="navbar-fixed">
 <nav>
     <div class="nav-wrapper">
-      <a href="{__HOMEPAGE__}" class="brand-logo">{__TITLE__}</a>
-  
+      <div class="logo"><a href="{__HOMEPAGE__}" class="brand-logo">{__TITLE__}</a></div>
       <ul class="right">
+        <li><input name="search" class="autocomplete" placeholder="search"></li>
         <li><a href="">Home</a></li>
         <li><a href="">Audit Plan</a></li>
         <li><a href="">Fieldwork</a></li>
@@ -31,8 +31,9 @@
 	<div class="divider"></div>
 	<div class="row">
 		<div class="col s12 left">
-			<h5>{__RECENT_AUDIT__}</h5>
+			<h5>{__RECENT_AUDIT__} <a href="{__HOMEPAGE__}/audit_program/create" class="waves-effect waves-light btn-small btn-floating right"><i class="material-icons">add</i></a></h5>
 			
+ 
 			<ul class="collection">
 				<li class="collection-item">GA - Audit 1</li>
 				<li class="collection-item">GA - Audit 2</li>
@@ -47,95 +48,22 @@
 <section id="content">
 	<div class="mid-container">
 		<div class="col s12 m6 l3">
-							<div class="card gradient-45deg-light-blue-cyan gradient-shadow min-height-100 white-text">
-								<div class="padding-4">
-									<div class="col s6 m6">
-										<i class="material-icons background-round mt-5">receipt</i>
-										<p>Total berkas </p>
-									</div>
-									<div class="col s6 m6 right-align">
-										<h5 class="mb-0">240 </h5>
-										<p class="no-margin">Remaining</p>
-										<p>9.400</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col s12 m6 l3">
-							<div class="card gradient-45deg-light-blue-cyan gradient-shadow min-height-100 white-text">
-								<div class="padding-4">
-									<div class="col s6 m6">
-										<i class="material-icons background-round mt-5">receipt</i>
-										<p>Total berkas </p>
-									</div>
-									<div class="col s6 m6 right-align">
-										<h5 class="mb-0">240 </h5>
-										<p class="no-margin">Remaining</p>
-										<p>9.400</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col s12 m6 l3">
-							<div class="card gradient-45deg-light-blue-cyan gradient-shadow min-height-100 white-text">
-								<div class="padding-4">
-									<div class="col s6 m6">
-										<i class="material-icons background-round mt-5">receipt</i>
-										<p>Total berkas </p>
-									</div>
-									<div class="col s6 m6 right-align">
-										<h5 class="mb-0">240 </h5>
-										<p class="no-margin">Remaining</p>
-										<p>9.400</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col s12 m6 l3">
-							<div class="card gradient-45deg-light-blue-cyan gradient-shadow min-height-100 white-text">
-								<div class="padding-4">
-									<div class="col s6 m6">
-										<i class="material-icons background-round mt-5">receipt</i>
-										<p>Total berkas </p>
-									</div>
-									<div class="col s6 m6 right-align">
-										<h5 class="mb-0">240 </h5>
-										<p class="no-margin">Remaining</p>
-										<p>9.400</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col s12 m6 l3">
-							<div class="card gradient-45deg-light-blue-cyan gradient-shadow min-height-100 white-text">
-								<div class="padding-4">
-									<div class="col s6 m6">
-										<i class="material-icons background-round mt-5">receipt</i>
-										<p>Total berkas </p>
-									</div>
-									<div class="col s6 m6 right-align">
-										<h5 class="mb-0">240 </h5>
-										<p class="no-margin">Remaining</p>
-										<p>9.400</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col s12 m6 l3">
-							<div class="card gradient-45deg-light-blue-cyan gradient-shadow min-height-100 white-text">
-								<div class="padding-4">
-									<div class="col s6 m6">
-										<i class="material-icons background-round mt-5">receipt</i>
-										<p>Total berkas </p>
-									</div>
-									<div class="col s6 m6 right-align">
-										<h5 class="mb-0">240 </h5>
-										<p class="no-margin">Remaining</p>
-										<p>9.400</p>
-									</div>
-								</div>
-							</div>
-						</div>
+			<ul class="tabs">
+				<li class="tab"><a class="active" href="#recentUpdate">{__RECENT_UPDATE__}</a></li>
+				<li class="tab"><a href="#yourTask">{__YOUR_TASK__}</a></li>
+			</ul>
+		</div>
+		<div id="recentUpdate" class="col s12">
+			<div class="row">
+					<div class="col s12">
+						 <strong>Welcome to the new feed!</strong><br>
+We’re updating the cards and ranking all the time, so check back regularly. At first, you might need to follow some people or star some repositories to get started. 
+					</div>
+			</div>
+		</div>
+		<div id="yourTask" class="col s12">
+		
+		</div>		
 	</div>
 </section>
 
@@ -144,5 +72,6 @@
 $(document).ready(function(){
     $('.sidenav').sidenav();
 	$(".dropdown-trigger").dropdown();
+	    $('.tabs').tabs({'swipeable ':true});
   });
 </script>

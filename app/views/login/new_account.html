@@ -4,6 +4,7 @@
 			<div class="col s10"><h5>{__APP_NAME__}</h5></div>
 			<div class="col s2">{__APP_VERSION__}</div>
 		</div>
+		<div class="row"><div class="col s12">{__CREATE_NEW_ACCOUNT__}</div></div>
 		<div class="divider"></div>
 
 		<div id="basic-form" class="section">
@@ -13,31 +14,34 @@
 				<div class="col s12 m4 scale-transition scale-in" id="dformLogin">
 					<div class="card-panel">
 						<div class="row">
-						<form class="form" role="form" autocomplete="off" id="formLogin" novalidate="true" method="POST">
+							<form class="form" role="form" autocomplete="off" id="formLogin" novalidate="true" method="POST">
 								<div class="input-field">
 									<i class="material-icons prefix">account_circle</i>
 									<label for="user_id">{__USERID__}</label>
 									<input type="text" class="validate" name="user_id" id="user_id" required="required" autocomplete="off">
-
 								</div>
 								<div class="input-field">
 									<i class="material-icons prefix">lock_outline</i>`
 									<label for="password">{__PASSWORD__}</label>
-									<input type="password" name="password" class="validate" id="password" required="" autocomplete="off" required="required">
-
+									<input type="password" name="password" class="validate" id="password" autocomplete="off" required="required">
 								</div>
-							
+								<div class="input-field">
+									<i class="material-icons prefix">lock_outline</i>`
+									<label for="password">{__CONFIRM_PASSWORD__}</label>
+									<input type="password" name="confirm_password" class="validate" id="confirm_password" required="required" autocomplete="off">
+								</div>
+								<div class="input-field">
+									<i class="material-icons prefix">account_circle</i>
+									<label for="user_id">{__EMAIL__}</label>
+									<input type="email" class="validate" name="email" id="email" required="required" autocomplete="off">
+								</div>
 								
 								<button type="submit" class="btn waves-effect waves-light right" id="btnLogin">
-									<i class="material-icons right">lock_open</i> {__LOGIN__}
-								</button>
-								
+									 {__CREATE_NEW_ACCOUNT__}</button>
 							</form>
-							
 						</div>
-						<div class="row" align="center">
-							<div class="col s6"><a href="{LINK_NEW_ACCOUNT}">{__CREATE_NEW_ACCOUNT__}</a></div>
-							<div class="col s6"><a href="{LINK_FORGOT_PASSWORD}">{__FORGOT_PASSWORD__}</a></div>
+						<div class="row">
+							<a href="{LINK_LOGIN}">&lt;&lt; {__BACK_TO_LOGIN__}</a>
 						</div>
 					</div>
 				</div>				
@@ -47,7 +51,7 @@
 </div>
 <script type="text/javascript">
 $('#formLogin').submit(function() {
-	var url = '{FORM_URL}';
+	var url = '{__FORM_URL__}';
 	var redirect	= '{__HOMEPAGE__}';
 	var dataString  = $(this).serialize();
 	  M.AutoInit();

@@ -27,7 +27,6 @@ class MD_Controller extends MD_Template{
 			$this->error= 'Error!!. silahkan buat file '.$controller.'.php di folder controllers terlebih dahulu';
 		}
 	}
-	
 	public function loadmodel($model,$alias=''){
 		if(file_exists('app/models/'.$model.'.php')){
 			include 'app/models/'.$model.'.php';
@@ -49,7 +48,6 @@ class MD_Controller extends MD_Template{
 				echo 'helper not found';
 			}
 		}
-
 	public function autoloadstylesheet(){
 		$directory = "assets/css/";
 		$files = glob($directory . "*.css");
@@ -149,7 +147,6 @@ class MD_Controller extends MD_Template{
 	public function redirect($url){
 		header('location:'.__HOMEPAGE__.'/'.$url);
 	}
-
 	public function connect_sqlite(){    
 		$this->dbsqlite = new MD_db(__SQLITEDB__);		
 		$this->dbsqlite->busyTimeout(5000);
@@ -158,7 +155,11 @@ class MD_Controller extends MD_Template{
 		$this->dbsqlite->close();
 		unset($this->dbsqlite);
 	}
-	
+	public function login_required(){
+		if($_SESSION['login']==false){
+			$this->redirect('login/');
+		}
+	}
 
 }
 ?>
