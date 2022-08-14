@@ -17,4 +17,20 @@
 				}
 			}
 		}
+		public function create_account($data){
+			$u = $data['username'];
+			$p = md5($data['password']);
+			$e = $data['email'];
+			$c = date('Y-m-d H:i:s');
+			$i = 1000;
+			$r = 1;
+			$sql = "INSERT INTO logins ('username','password','email','created_at','creator_id','role_id')
+					VALUES ('$u','$p','$e','$c','$i','$r')";
+			if ($ret=$this->dbsqlite->query($sql)){
+				return TRUE;
+			}
+			else{
+				return FALSE;
+			}	
+		}
 	}

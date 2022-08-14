@@ -7,6 +7,7 @@ class home extends MD_app{
 			$this->SetTemplate($this->getview("home","home"));
 			$this->setVar('__TITLE__',__TITLE__);
 			$this->setVar('__HOMEPAGE__',__HOMEPAGE__);
+			$this->setVar('USERNAME',$_SESSION['username']);
 			$this->publishView();
 			$this->konten=$this->output;			
 	}

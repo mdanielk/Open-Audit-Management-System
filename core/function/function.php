@@ -6,6 +6,8 @@
 
 function netralize($str){
 	$str=str_replace('[^a-z0-9]', "", $str);
+	$str=str_replace('<', "&lt;", $str);
+	$str=str_replace('>', "&gt;", $str);
 	return $str;
 }
 function base_url($url){

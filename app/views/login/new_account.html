@@ -11,14 +11,14 @@
 			<div class="row">
 				
 				<div class="col s12 m4"></div>
-				<div class="col s12 m4 scale-transition scale-in" id="dformLogin">
+				<div class="col s12 m4 scale-transition scale-in" id="dformCreateAccount">
 					<div class="card-panel">
 						<div class="row">
-							<form class="form" role="form" autocomplete="off" id="formLogin" novalidate="true" method="POST">
+							<form class="form" role="form" autocomplete="off" id="formCreateAccount" novalidate="true" method="POST">
 								<div class="input-field">
 									<i class="material-icons prefix">account_circle</i>
-									<label for="user_id">{__USERID__}</label>
-									<input type="text" class="validate" name="user_id" id="user_id" required="required" autocomplete="off">
+									<label for="username">{__USERNAME__}</label>
+									<input type="text" class="validate" name="username" id="username" required="required" autocomplete="off">
 								</div>
 								<div class="input-field">
 									<i class="material-icons prefix">lock_outline</i>`
@@ -27,12 +27,12 @@
 								</div>
 								<div class="input-field">
 									<i class="material-icons prefix">lock_outline</i>`
-									<label for="password">{__CONFIRM_PASSWORD__}</label>
+									<label for="confirm_password">{__CONFIRM_PASSWORD__}</label>
 									<input type="password" name="confirm_password" class="validate" id="confirm_password" required="required" autocomplete="off">
 								</div>
 								<div class="input-field">
 									<i class="material-icons prefix">account_circle</i>
-									<label for="user_id">{__EMAIL__}</label>
+									<label for="email">{__EMAIL__}</label>
 									<input type="email" class="validate" name="email" id="email" required="required" autocomplete="off">
 								</div>
 								
@@ -50,11 +50,10 @@
 	</div>
 </div>
 <script type="text/javascript">
-$('#formLogin').submit(function() {
+$('#formCreateAccount').submit(function() {
 	var url = '{__FORM_URL__}';
 	var redirect	= '{__HOMEPAGE__}';
 	var dataString  = $(this).serialize();
-	  M.AutoInit();
 		$.ajax({
 			type: 'post',
 			url: url,

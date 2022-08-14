@@ -11,9 +11,11 @@ class Audit_program extends MD_app{
 			$this->konten=$this->output;			
 	}
 	public function create(){
+			$this->loadhelper('topnav');
 			$this->SetTemplate($this->getview("audit_program","create"));
 			$this->setVar('__TITLE__',__TITLE__);
 			$this->setVar('__HOMEPAGE__',__HOMEPAGE__);
+			$this->setVar('TOPNAV',$this->topnav->show());
 			$this->publishView();
 			$this->konten=$this->output;			
 	}

@@ -1,0 +1,19 @@
+**Functional Design
+
+I. User Roles
+	1. Root
+	2. Auditor
+
+II. Audit Step
+	1. Audit Program
+		- Planning
+		- Preliminary
+		- Reference
+	2. Audit Fieldwork
+		- Working Paper
+		- Finding
+		- Confirmation
+	3. Audit Report
+		- Reporting
+	4. Audit Tracking
+		- Tracking  

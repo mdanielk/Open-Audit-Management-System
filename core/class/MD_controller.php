@@ -42,7 +42,7 @@ class MD_Controller extends MD_Template{
 	public function loadhelper($helper){
 		if(file_exists('app/helpers/'.$helper.'.php')){
 			include 'app/helpers/'.$helper.'.php';
-			$this->helper=new $helper;			
+			$this->$helper=new $helper;			
 			}
 			else {
 				echo 'helper not found';

@@ -46,11 +46,11 @@
 	</div>
 </div>
 <script type="text/javascript">
+M.AutoInit();
 $('#formLogin').submit(function() {
 	var url = '{FORM_URL}';
 	var redirect	= '{__HOMEPAGE__}';
 	var dataString  = $(this).serialize();
-	  M.AutoInit();
 		$.ajax({
 			type: 'post',
 			url: url,
