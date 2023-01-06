@@ -61,6 +61,7 @@ class login extends MD_app{
 		if($this->lm->check_login($u,$p)==true){
 			$_SESSION['login']=true;
 			$_SESSION['username']=$u;
+			$_SESSION['login_id']=$this->lm->login_id;
 			$out = array(
 				'status'=>1,
 				'message'=>'Success!',

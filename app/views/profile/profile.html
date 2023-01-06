@@ -1,0 +1,120 @@
+<header>
+<ul id="dropdownProfile" class="dropdown-content">
+  <li><a href="#!">Your profile</a></li>
+  <li><a href="#!">Settings</a></li>
+  <li><a href="#!">Help</a></li>
+  <li><a href="knowledge/">Knowledge Base</a></li>
+  <li class="divider"></li>
+  <li><a href="{__HOMEPAGE__}/logout/">Logout</a></li>
+</ul>
+<div class="navbar-fixed">
+<nav>
+    <div class="nav-wrapper">
+      <div class="logo"><a href="{__HOMEPAGE__}" class="brand-logo">{__TITLE__}</a></div>
+      <ul class="right">
+        <li><input name="search" class="input-field autocomplete" placeholder="search"></li>
+        <li><a href="">Home</a></li>
+        <li><a href="">Audit Plan</a></li>
+        <li><a href="">Fieldwork</a></li>
+        <li><a href="">Report</a></li>
+        <li><a href="">Follow Up</a></li>
+		<li><a class="dropdown-trigger" href="#!" data-target="dropdownProfile">Login As {USERNAME}!<i class="material-icons right">arrow_drop_down</i></a></li>
+      </ul>
+    </div>
+ </nav>
+</div>
+  <div class="sidenav sidenav-fixed padding">
+    <div class="col s12 center">
+		{PHOTO}
+		<h4>{FULLNAME}</h4>
+		{JOBTITLE}
+	</div>
+	<div class="divider"></div>
+	<div class="row">
+		<div class="col s12 left">
+			<h5>{__RECENT_AUDIT_PROJECT__} <a href="{__HOMEPAGE__}/audit_project/create" data-position="top" data-tooltip="{__CREATE_NEW_PROJECT__}" class="tooltipped waves-effect waves-light btn-small btn-floating right"><i class="material-icons">add</i></a></h5>
+	
+			<ol class="" id="recentAuditProject">
+	
+			</ol>
+			<a class="link" href="{LINK_AUDIT_PROJECT}">Show All</a>
+		</div>
+	</div>
+	<div class="divider"></div>
+	<div class="row">
+		<div class="col s12 left">
+			<h5>{__RECENT_AUDIT__} <a href="{__HOMEPAGE__}/audit_program/create" data-position="top" data-tooltip="{__CREATE_NEW_PROGRAM__}" class="tooltipped waves-effect waves-light btn-small btn-floating right"><i class="material-icons">add</i></a></h5>
+	
+			<ol class="" id="recentAuditProgram">
+	
+			</ol>
+			<a class="link" href="{LINK_AUDIT_PROGRAM}">Show All</a>
+		</div>
+	</div>
+  </div>
+
+</header>
+<main>
+Profile
+	<div class="mid-container">
+		<div class="col s12 m6 l3">
+			<ul class="tabs">
+				<li class="tab"><a class="active" href="#recentUpdate">{__RECENT_UPDATE__}</a></li>
+				<li class="tab"><a href="#yourTask">{__YOUR_TASK__}</a></li>
+			</ul>
+		</div>
+		<div id="recentUpdate" class="col s12">
+			<div class="row">
+					<div class="col s12">
+						 <strong>Welcome to the new feed!</strong><br>
+We’re updating the cards and ranking all the time, so check back regularly. At first, you might need to follow some people or star some repositories to get started. 
+					</div>
+			</div>
+		</div>
+		<div id="yourTask" class="col s12">
+		
+		</div>		
+	</div>
+</section>
+
+</main>
+<script type="text/javascript">
+M.AutoInit();
+$('document').ready(function() {
+	var url = '{LIST_URL}';
+	var dataString  = "{unit:1,total:5,start:1,sort_by:1,sort_type:'asc'}";
+		$.ajax({
+			type: 'get',
+			url: url,
+			data: dataString,
+			dataType: 'json',
+			beforeSend: function() {
+				$('#ajax_loading').addClass('scale-in');
+			},
+			success: function(data) {
+				if (data.status == "0") {				
+					M.toast({html:data.message});
+					$('#ajax_loading').removeClass('scale-in');	
+				}
+				if (data.status == "1") {
+					$(data.content).each(function(i,v){
+						$('#recentAuditProgram').append('<li class="collection-item">'+v['audit_type']+' - '+v['audit_program_title']+'</li>');
+					});				
+				}
+				if (data.status == "2") {
+					M.toast({html:data.message});
+					$('#ajax_loading').removeClass('scale-in');				
+				}
+			},
+			complete: function() {
+				$('#ajax_loading').removeClass('scale-in');
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				var lastRefreshed = new Date();
+				var str = lastRefreshed.toString() +"\n\n"+errorThrown;
+				$('.ajax_loading').hide();
+			}
+		});
+		return false;
+	});
+</script>

@@ -5171,7 +5171,7 @@ small {
   display: inline-block;
   height: 36px;
   line-height: 36px;
-  padding: 0 16px;
+  padding: 0 8px;
   text-transform: uppercase;
   vertical-align: middle;
   -webkit-tap-highlight-color: transparent;
@@ -5530,9 +5530,9 @@ button.btn-floating {
 }
 
 .btn-small {
-  height: 32.4px;
-  line-height: 32.4px;
-  font-size: 13px;
+  height: 22.4px;
+  line-height: 22px;
+  font-size: 11px;
 }
 
 .btn-small i {

@@ -1,28 +1,131 @@
 {TOPNAV}
 <main>
 <section id="content">
-	<div class="mid-container">
-		<div class="col s12 m6 l3">
-			<ul class="tabs">
-				<li class="tab"><a class="active" href="#recentUpdate">{__RECENT_UPDATE__}</a></li>
-				<li class="tab"><a href="#yourTask">{__YOUR_TASK__}</a></li>
-			</ul>
+	<div class="container">
+		<form class="form" id="formNewAuditProgram" method="post" action="">
+		<div class="col s12">
+			<h5>{__CREATE_NEW_PROGRAM__}</h5>
 		</div>
-		<div id="recentUpdate" class="col s12">
-			<div class="row">
-					<div class="col s12">
-						 <strong>Welcome to the new feed!</strong><br>
-We’re updating the cards and ranking all the time, so check back regularly. At first, you might need to follow some people or star some repositories to get started. 
-					</div>
+		<div class="col s12">
+			{__CREATE_NEW_PROGRAM_DESCRIPTION__}
+		</div>
+		<div class="divider"></div>
+		<div class="row">
+			<div class="input-field col s12"></div>
+			
+			<div class="input-field col s12">
+			 <input placeholder="{__AUDIT_PROGRAM_TITLE__}" type="text" name="audit_program_title" id="audit_program_title">
+			 <label for="äudit_program_title">{__AUDIT_PROGRAM_TITLE__}</label>
 			</div>
 		</div>
-		<div id="yourTask" class="col s12">
-		
-		</div>		
+		<div class="s12">
+			<div class="input-field col s12">
+				<input placeholder="{__DESCRIPTION__}" type="text" name="audit_program_description" id="audit_program_description">
+				<label for="audit_program_description">{__DESCRIPTION__} ({__OPTIONAL__})</label>
+			</div>
+		</div>
+		<div class="row">
+		<div class="col s6 m6 l6">
+			<div class="input-field col s12">
+				<p>Audit Type</p>
+				<p>
+				  <label>
+					<input name="audit_type" type="radio" value="GA" checked />
+					<span>General Audit</span>
+				  </label>
+				</p>
+				<p>
+				  <label>
+					<input name="audit_type" type="radio" value="SA" />
+					<span>Special Audit/Investigation Audit</span>
+				  </label>
+				</p>
+			</div>
+		</div>
+		<div class="col s6 m6 l6">
+			<div class="input-field col s12">
+				<p>Visibility</p>
+				<p>
+				  <label>
+					<input name="visibility" type="radio" value="public" checked />
+					<span>Public</span>
+				  </label>
+				</p>
+				<p>
+				  <label>
+					<input name="visibility" type="radio" value="private" />
+					<span>Private</span>
+				  </label>
+				</p>
+			</div>
+		</div>
+		</div>
+		<div class="row">
+			<button class="btn waves-effect waves-light right" type="submit" name="btn_create" id="btn_create">{__CREATE_NEW_PROGRAM__}
+			<i class="material-icons right">send</i>
+			</button>
+		</div>
+		</form>
 	</div>
-</section>
 
+</section>
 </main>
+<div id="modal-create-unit" class="modal">
+	<div class="modal-content">
+		<h5>{__CREATE_NEW_UNIT__}</h5>
+		<form action="#" class="s12" name="new-unit">
+			<div class="s12">
+				<input class="input-field" type="text" name="unit_name">
+				<label for="unit_name">{__UNIT_NAME__}</label>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<a class="btn btn-xs">Save</a>
+	</div>
+</div>
 <script type="text/javascript">
 M.AutoInit();
+$('#formNewAuditProgram').submit(function() {
+	var url = '{FORM_URL}';
+	var redirect	= '{SUCCESS_REDIRECT}';
+	var dataString  = $(this).serialize();
+		$.ajax({
+			type: 'post',
+			url: url,
+			data: dataString,
+			dataType: 'json',
+			beforeSend: function() {
+				$('#ajax_loading').addClass('scale-in');
+			},
+			success: function(data) {
+				if (data.status == "0") {				
+					M.toast({html:data.message});
+					$('#ajax_loading').removeClass('scale-in');	
+				}
+				if (data.status == "1") {
+					$('#user_id').attr('disabled','disabled');
+					$('#user_password').attr('disabled','disabled');
+					$('#btnLogin').addClass('disabled');
+					window.location = redirect;		
+				}
+				if (data.status == "2") {
+					M.toast({html:data.message});
+					$('#ajax_loading').removeClass('scale-in');
+					$('#dformLogin').removeClass('scale-in');
+					$('#dformLogin').hide();					
+				}
+			},
+			complete: function() {
+				$('#ajax_loading').removeClass('scale-in');
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				var lastRefreshed = new Date();
+				var str = lastRefreshed.toString() +"\n\n"+errorThrown;
+				$('.ajax_loading').hide();
+				$('#validation-error').html(str);
+			}
+		});
+		return false;
+	});
 </script>

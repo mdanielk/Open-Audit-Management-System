@@ -1,5 +1,6 @@
 <?php 
 	class Login_model extends MD_model{
+		public $login_id;
 		public function __construct(){
 			$this->connect_sqlite();
 		}
@@ -10,9 +11,11 @@
 			$ret=$this->dbsqlite->query($sql);
 			while($r = $ret->fetchArray(SQLITE3_ASSOC) ){	
 				if (md5($p)==$r['password']){
+					$this->login_id=$r['login_id'];
 					return TRUE;
 				}
 				else{
+					$this->login_id = 0;
 					return FALSE;
 				}
 			}

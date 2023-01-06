@@ -1,0 +1,87 @@
+{TOPNAV}
+<main>
+<section id="content">
+	<div class="container">		
+		<div class="row">
+			<div class="col s12">	
+				<div class="input-field inline col s6">
+					<input name="filter_title" type="text" placeholder="{__SEARCH_AUDIT_PROGRAM__}"> 
+				</div>
+				<div class="input-field inline col s2">
+					<select name="filter_unit">
+						<option value="">Unit</option>
+					</select>
+				</div>
+				<div class="input-field inline col s2">
+					<select name="sort">
+						<option value="">Sort</option>
+					</select>
+				</div>
+				<div class="input-field inline col s2">
+					<a href="{URL_CREATE_NEW}" class="btn btn-success">{__CREATE_NEW__}</a>
+				</div>
+			</div>
+		</div>
+		<div id="auditProgramList">
+			
+		</div>
+		
+	</div>
+</section>
+
+</main>
+<script type="text/javascript">
+M.AutoInit();
+$('document').ready(function() {
+	var url = '{LIST_URL}';
+	var dataString  = "{unit:1,total:5,start:1,sort_by:1,sort_type:'asc'}";
+		$.ajax({
+			type: 'get',
+			url: url,
+			data: dataString,
+			dataType: 'json',
+			beforeSend: function() {
+				$('#ajax_loading').addClass('scale-in');
+			},
+			success: function(data) {
+				if (data.status == "0") {				
+					M.toast({html:data.message});
+					$('#ajax_loading').removeClass('scale-in');	
+				}
+				if (data.status == "1") {
+					$(data.content).each(function(i,v){
+						$('#auditProgramList').append(
+								'<div class="row">'+
+									'<div class="col s12">'+
+											'<div class="col s12"><a href="{LINK_DETAIL}'+v['id']+'"><h5>'+v['audit_program_title']+'</h5></a></div>'+
+											'<div class="col s12 "><i>'+v['description']+'</i></div>'+											
+											'<div class="col s12 ">'+									
+												'<a href=""><span class="blue lighten-4 badge">0 References</span></a>'+			
+												'<a href=""><span class="purple lighten-4 badge">0 Testing Steps</span></a>'+
+												'<span class="green lighten-4 badge">0 Controls</span></a>'+
+												'<a href=""><span class="yellow badge">0 Risks</span></a>'+
+												'<a href="{HOMEPAGE}/process_list/'++v['id']+'"><span class="red lighten-3 badge">0 Processes</span></a>'+
+											'</div>'+
+									'</div>'+
+								'</div>'+
+								'<div class="divider"></div>'
+						);
+					});				
+				}
+				if (data.status == "2") {
+					M.toast({html:data.message});
+					$('#ajax_loading').removeClass('scale-in');				
+				}
+			},
+			complete: function() {
+				$('#ajax_loading').removeClass('scale-in');
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				var lastRefreshed = new Date();
+				var str = lastRefreshed.toString() +"\n\n"+errorThrown;
+				$('.ajax_loading').hide();
+			}
+		});
+		return false;
+	});
+</script>

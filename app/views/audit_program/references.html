@@ -1,0 +1,241 @@
+{TOPNAV}
+<main>
+<section id="content">	
+<div class ="container">
+	<div class="row">
+		<div class="col s12 m12 l12"">&nbsp;</div>
+	
+		<div class="col s12 m8 l8">		
+				<div class="s12">
+					<div class="col s3">Audit Program Title</div>
+					<div class="col s9">: {AUDIT_PROGRAM_TITLE}</div>
+				</div>
+				<div class="s12 m8">
+					<div class="col s3">Description</div>
+					<div class="col s9">: {AUDIT_PROGRAM_DESCRIPTION}</div>
+				</div>
+		</div>
+		<div class="col s12 m4 l4">
+			<a href="{__HOMEPAGE__}/audit_program/" data-position="top" data-tooltip="Back to program list" class="tooltipped blue waves-effect waves-light btn-small btn-floating"><i class="material-icons">arrow_back</i></a>
+			<a href="#" data-position="top" data-tooltip="Add New Reference" data-target="new-reference-modal" class="modal-trigger tooltipped red waves-effect waves-light btn-small btn-floating"><i class="material-icons">add</i></a>
+		</div>
+		<div class="col s12"><H4>References</H4></div>
+	</div>
+	<div class="row">
+		<table class="striped responsive-table">
+			<thead>
+				<tr>
+					<th>References</th>
+					<th>Created By</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody id="auditReferenceList">
+			
+			</tbody>
+		</table>
+	</div>
+</div>
+</section>
+</main>
+
+<!-- New Reference Modal-->
+<div class="modal" id="new-reference-modal">
+{NEW_REFERENCE_MODAL}
+</div>
+<div class="modal" id="edit-reference-modal">
+
+</div>
+<div class="modal" id="delete-reference-modal">
+
+</div>
+<script type="text/javascript">
+M.AutoInit();
+$('select').formSelect();
+function closeModal(){
+$('.modal').modal('close');
+}
+function _editReference(id){
+	var url = '{URL_EDIT_REFERENCE}';
+	$('#edit-reference-modal').modal('open');
+	$.get(url+'/id/'+id,function(result){
+		$('#edit-reference-modal').html(result);
+	});
+}
+function _deleteReference(id){
+	var url = '{URL_DELETE_REFERENCE}';
+	$('#delete-reference-modal').modal('open');
+	$.get(url+'/id/'+id,function(result){
+		$('#delete-reference-modal').html(result);
+	});
+}
+function submitDeleteReference(i){
+var url = '{URL_SUBMIT_DELETE_REFERENCE}';
+$.ajax({
+		type	: 'get',
+		url		: url,
+		data	: {'id':i},
+		dataType: 'json',
+		beforeSend: function(){
+			$('#ajax_loading').addClass('scale-in');
+		},
+		success	: function(res){
+			if(res.status == "0"){
+				M.toast({html:res.message});
+				$('#ajax_loading').removeClass('scale-in');
+				$('#delete-reference-modal').close();
+			}
+			if(res.status == "1"){
+				M.toast({html:res.message});
+				$('#delete-reference-modal').modal('close');
+			}
+		},
+		complete: function(){
+			$('#ajax_loading').removeClass('scale-in');
+		},
+		error: function(jqXHR, textStatus, errorThrown){
+			var lastRefreshed = new Date();
+			var str = lastRefreshed.toString() +"\n\n"+errorThrown;
+			$('#ajax_loading').hide();
+		}
+	});
+}
+function submitEditReference(){
+	var url = '{URL_SUBMIT_EDIT_REFERENCE}';
+	var formEdit = $('#form-edit-reference');
+	$.ajax({
+		type	: 'post',
+		url		: url,
+		data	: $(formEdit).serialize(),
+		dataType: 'json',
+		beforeSend: function(){
+			$('#ajax_loading').addClass('scale-in');
+		},
+		success	: function(res){
+			if(res.status == "0"){
+				M.toast({html:res.message});
+				$('#ajax_loading').removeClass('scale-in');
+				$('#edit-reference-modal').close();
+			}
+			if(res.status == "1"){
+				M.toast({html:res.message});
+				$('#edit-reference-modal').modal('close');
+			}
+		},
+		complete: function(){
+			$('#ajax_loading').removeClass('scale-in');
+		},
+		error: function(jqXHR, textStatus, errorThrown){
+			var lastRefreshed = new Date();
+			var str = lastRefreshed.toString() +"\n\n"+errorThrown;
+			$('#ajax_loading').hide();
+		}
+	});
+}
+function addUploadForm(){
+	$('#uploadForm').append('<div class="row">'+
+		'<div class="input-field file-field col s12 m6 l6">'+
+				'<div class="btn">Select file'+
+					'<input type="file" name="reference_file[]" id="reference_file" multiple>'+
+				'</div>'+							
+				'<div class="file-path-wrapper">'+
+				'	<input class="file-path validate" type="text" name="filename[]">'+
+				'</div>'+		
+			'</div>'+						
+		'<a href="#" onClick="addUploadForm()" class="btn btn-add"><i class="material-icons">add</i></a>'+
+		'&nbsp; <a href="#" onClick="$(this).parent().remove();" class="btn red"><i class="material-icons">close</i></a>'+
+		'</div>');
+}
+
+$('document').ready(function() {
+	$('.dropdown-trigger').dropdown();
+	
+	$('.modal').modal({
+		onCloseEnd: function(){
+		    location.reload();
+		}
+	});
+	var url = '{LIST_URL}';
+	var dataString  = {pid:{PID}};
+		$.ajax({
+			type: 'post',
+			url: url,
+			data: dataString,
+			dataType: 'json',
+			beforeSend: function() {
+				$('#ajax_loading').addClass('scale-in');
+			},
+			success: function(data) {
+				if (data.status == "0") {				
+					M.toast({html:data.message});
+					$('#ajax_loading').removeClass('scale-in');	
+				}
+				if (data.status == "1") {
+					$(data.content).each(function(i,v){
+						$('#auditReferenceList').append(
+							'<tr>'+
+								'<td><b>'+v['reference_code']+': '+v['reference_name'].replace('\\/g','')+'</b><br><i>'+v['description']+'</i></td>'+
+								'<td>'+v['username']+'</td>'+
+								'<td>'+
+									'<a href="#" onClick="_editReference('+v['id']+')" class="btn-small waves-effect waves-light"><i class="material-icons left">edit</i>Edit</a> '+
+									'<a href="#" onClick="_deleteReference('+v['id']+')" class="btn-small waves-effect waves-light red lighten-3"><i class="material-icons left">clear</i>Delete</a>'+
+									'</td>'+
+							'</tr>'
+						);
+					});				
+				}
+				if (data.status == "2") {
+					M.toast({html:data.message});
+					$('#ajax_loading').removeClass('scale-in');				
+				}
+			},
+			complete: function() {
+				$('#ajax_loading').removeClass('scale-in');
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				var lastRefreshed = new Date();
+				var str = lastRefreshed.toString() +"\n\n"+errorThrown;
+				$('.ajax_loading').hide();
+			}
+		});
+		return false;
+	});
+
+$('#form-new-references').submit(function(e){
+	e.preventDefault();
+	var url = $(this).attr('action');
+	$.ajax({
+		type	: 'post',
+		url		: url,
+		//data	: $(this).serialize(),
+		data	: new FormData(this),
+		dataType: 'json',
+		processData: false,
+        contentType: false,
+		beforeSend: function(){
+			$('#ajax_loading').addClass('scale-in');
+		},
+		success	: function(res){
+			if(res.status == "0"){
+				M.toast({html:res.message});
+				$('#ajax_loading').removeClass('scale-in');
+				$('.modal').close();
+			}
+			if(res.status == "1"){
+				M.toast({html:res.message});
+				$('.modal').modal('close');
+			}
+		},
+		complete: function(){
+			$('#ajax_loading').removeClass('scale-in');
+		},
+		error: function(jqXHR, textStatus, errorThrown){
+			var lastRefreshed = new Date();
+			var str = lastRefreshed.toString() +"\n\n"+errorThrown;
+			$('#ajax_loading').hide();
+		}
+	});
+});
+
+
+</script>

@@ -38,6 +38,7 @@ public function publish() {
     $this->replaceAll();
     echo $this->template;
 }
+
 public function publishView() {
     $this->replaceAll();
    $this->output=$this->template;

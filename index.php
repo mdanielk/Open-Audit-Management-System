@@ -9,7 +9,7 @@ include_once 'core/class/MD_controller.php';
 include_once 'core/class/MD_model.php';
 include_once 'core/class/MD_app.php';
 include_once 'core/function/function.php';
-
+require 'vendor/autoload.php';
 
 $md=check_var('get','md');
 if ($md==''){
